@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.urls import reverse
+from django.utils.text import slugify
 
 
 class Manufacturer(models.Model):
@@ -16,6 +17,16 @@ class Manufacturer(models.Model):
 
 class Driver(AbstractUser):
     license_number = models.CharField(max_length=255, unique=True)
+    slug = models.SlugField(max_length=255, unique=True, null=True)
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.slug = slugify(self.username)
+
+            super(Driver, self).save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse("taxi:driver-detail", args=[self.slug])
 
     class Meta:
         verbose_name = "driver"
@@ -23,9 +34,6 @@ class Driver(AbstractUser):
 
     def __str__(self):
         return f"{self.username} ({self.first_name} {self.last_name})"
-
-    def get_absolute_url(self):
-        return reverse("taxi:driver-detail", kwargs={"pk": self.pk})
 
 
 class Car(models.Model):
