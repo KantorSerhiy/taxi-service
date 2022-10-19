@@ -20,10 +20,10 @@ class Driver(AbstractUser):
     slug = models.SlugField(max_length=255, unique=True)
 
     def save(self, *args, **kwargs):
-        if not self.id:
+        if not self.slug:
             self.slug = slugify(self.username)
 
-            super(Driver, self).save(*args, **kwargs)
+        return super(Driver, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse("taxi:driver-detail", args=[self.slug])
