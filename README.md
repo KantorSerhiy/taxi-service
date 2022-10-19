@@ -8,7 +8,7 @@ Django project for managing drivers, manufacturers and cars in Taxi service
 ### Just try it with a test user
 
 * login: user
-* password: user12345
+* password: user1234
 
 
 ### Installation
