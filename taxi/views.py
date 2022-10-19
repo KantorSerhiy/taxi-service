@@ -7,11 +7,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Driver, Car, Manufacturer
 from .forms import DriverCreationForm, \
-    DriverLicenseUpdateForm, \
     CarForm, \
     DriversSearchForm, \
     ManufacturerSearchForm, \
-    CarsSearchForm
+    CarsSearchForm, DriverUpdateForm
 
 
 @login_required
@@ -163,9 +162,9 @@ class DriverCreateView(LoginRequiredMixin, generic.CreateView):
     form_class = DriverCreationForm
 
 
-class DriverLicenseUpdateView(LoginRequiredMixin, generic.UpdateView):
+class DriverUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Driver
-    form_class = DriverLicenseUpdateForm
+    form_class = DriverUpdateForm
     success_url = reverse_lazy("taxi:driver-list")
 
 
