@@ -6,11 +6,11 @@ from taxi.models import Manufacturer, Car
 
 # Create your tests here.
 
+
 class ModelTest(TestCase):
     def test_manufacturer_str(self):
         manufacturer = Manufacturer.objects.create(
-            name="test name",
-            country="test country"
+            name="test name", country="test country"
         )
 
         self.assertEqual(str(manufacturer), "test name test country")
@@ -20,17 +20,17 @@ class ModelTest(TestCase):
             username="test username",
             password="test1234",
             first_name="test first",
-            last_name="test last"
+            last_name="test last",
         )
 
-        self.assertEqual(str(driver),
-                         f"{driver.username} "
-                         f"({driver.first_name} {driver.last_name})")
+        self.assertEqual(
+            str(driver),
+            f"{driver.username} " f"({driver.first_name} {driver.last_name})",
+        )
 
     def test_car_str(self):
         manufacturer = Manufacturer.objects.create(
-            name="test name",
-            country="test country"
+            name="test name", country="test country"
         )
         car = Car.objects.create(
             model="test model",
@@ -44,9 +44,7 @@ class ModelTest(TestCase):
         password = "test12345"
         license_number = "OIN45698"
         driver = get_user_model().objects.create_user(
-            username=username,
-            password=password,
-            license_number=license_number
+            username=username, password=password, license_number=license_number
         )
 
         self.assertEqual(driver.username, username)

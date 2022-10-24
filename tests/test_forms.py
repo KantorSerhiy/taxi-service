@@ -13,7 +13,7 @@ class DriverFormTest(TestCase):
             "password2": "Qwer123456",
             "first_name": "test first name",
             "last_name": "test last name",
-            "license_number": "QWE12345"
+            "license_number": "QWE12345",
         }
 
         form = DriverCreationForm(data=form_data)
@@ -27,9 +27,7 @@ class DriverFormTest(TestCase):
 
 class PrivateDriverTest(TestCase):
     def setUp(self) -> None:
-        self.user = get_user_model().objects.create_user(
-            "test", "Qwer123456"
-        )
+        self.user = get_user_model().objects.create_user("test", "Qwer123456")
         self.client.force_login(self.user)
 
     def test_create_drivers(self):
@@ -39,7 +37,7 @@ class PrivateDriverTest(TestCase):
             "password2": "Qwer123456",
             "first_name": "test first name",
             "last_name": "test last name",
-            "license_number": "QWE12345"
+            "license_number": "QWE12345",
         }
 
         self.client.post(reverse("taxi:driver-create"), date=form_data)

@@ -7,14 +7,13 @@ class AdminSiteTests(TestCase):
     def setUp(self) -> None:
         self.client = Client()
         self.admin_user = get_user_model().objects.create_superuser(
-            username="admin",
-            password="admin1234"
+            username="admin", password="admin1234"
         )
         self.client.force_login(self.admin_user)
         self.driver = get_user_model().objects.create_user(
             username="driver",
             password="driver1234",
-            license_number="test licence number"
+            license_number="test licence number",
         )
 
     def test_driver_licence_number_listed(self):

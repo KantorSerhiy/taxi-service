@@ -40,7 +40,7 @@ class DriverUpdateForm(forms.ModelForm):
 
 
 def validate_license_number(
-        license_number,
+    license_number,
 ):  # regex validation is also possible here
     if len(license_number) != 8:
         raise ValidationError("License number should consist of 8 characters")
@@ -76,5 +76,4 @@ class CarsSearchForm(forms.Form):
         required=False,
         label="",
         widget=forms.TextInput(attrs={"placeholder": "Search by model.."}),
-
     )

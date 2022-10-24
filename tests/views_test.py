@@ -19,24 +19,17 @@ class PublicManufacturerTest(TestCase):
 class PrivateManufacturerTest(TestCase):
     def setUp(self) -> None:
         self.user = get_user_model().objects.create_user(
-            username="test",
-            password="test1234"
+            username="test", password="test1234"
         )
         self.client.force_login(self.user)
 
     def test_retrieve_manufacturer(self):
-        Manufacturer.objects.create(
-            name="test name",
-            country="test country"
-        )
+        Manufacturer.objects.create(name="test name", country="test country")
         result = self.client.get(MANUFACTURER_URL)
         manufacturers = Manufacturer.objects.all()
 
         self.assertEqual(result.status_code, 200)
-        self.assertEqual(
-            list(result.context["manufacturer_list"]),
-            list(manufacturers)
-        )
+        self.assertEqual(list(result.context["manufacturer_list"]), list(manufacturers))
         self.assertTemplateUsed(result, "taxi/manufacturer_list.html")
 
 
